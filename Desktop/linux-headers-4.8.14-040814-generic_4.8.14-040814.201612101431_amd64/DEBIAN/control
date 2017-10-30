@@ -1,0 +1,16 @@
+Package: linux-headers-4.8.14-040814-generic
+Source: linux
+Version: 4.8.14-040814.201612101431
+Architecture: amd64
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Installed-Size: 7369
+Depends: linux-headers-4.8.14-040814, libc6 (>= 2.14), libssl1.0.0 (>= 1.0.0)
+Provides: linux-headers, linux-headers-3.0
+Section: devel
+Priority: optional
+Description: Linux kernel headers for version 4.8.14 on 64 bit x86 SMP
+ This package provides kernel header files for version 4.8.14 on
+ 64 bit x86 SMP.
+ .
+ This is for sites that want the latest kernel headers.  Please read
+ /usr/share/doc/linux-headers-4.8.14-040814/debian.README.gz for details.

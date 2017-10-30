@@ -1,0 +1,27 @@
+Package: linux-image-4.8.14-040814-generic
+Source: linux
+Version: 4.8.14-040814.201612101431
+Architecture: amd64
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Installed-Size: 223423
+Depends: initramfs-tools | linux-initramfs-tool, kmod
+Recommends: grub-pc | grub-efi-amd64 | grub-efi-ia32 | grub | lilo
+Suggests: fdutils, linux-doc-4.8.14 | linux-source-4.8.14, linux-tools, linux-headers-4.8.14-040814-generic
+Provides: fuse-module, ivtv-modules, kvm-api-4, linux-image, redhat-cluster-modules, virtualbox-guest-modules
+Section: kernel
+Priority: optional
+Description: Linux kernel image for version 4.8.14 on 64 bit x86 SMP
+ This package contains the Linux kernel image for version 4.8.14 on
+ 64 bit x86 SMP.
+ .
+ Also includes the corresponding System.map file, the modules built by the
+ packager, and scripts that try to ensure that the system is not left in an
+ unbootable state after an update.
+ .
+ Supports Generic processors.
+ .
+ Geared toward desktop and server systems.
+ .
+ You likely do not want to install this package directly. Instead, install
+ the linux-generic meta-package, which will ensure that upgrades work
+ correctly, and that supporting packages are also installed.

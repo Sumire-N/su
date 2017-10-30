@@ -1,0 +1,14 @@
+Package: linux-headers-4.8.14-040814
+Source: linux
+Version: 4.8.14-040814.201612101431
+Architecture: all
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Installed-Size: 69388
+Depends: coreutils
+Section: devel
+Priority: optional
+Multi-Arch: foreign
+Description: Header files related to Linux kernel version 4.8.14
+ This package provides kernel header files for version 4.8.14, for sites
+ that want the latest kernel headers. Please read
+ /usr/share/doc/linux-headers-4.8.14-040814/debian.README.gz for details

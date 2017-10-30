@@ -1,0 +1,35 @@
+#include "ros/ros.h"
+#include"geometry_msgs/Twist.h"
+#include"sensor_msgs/LaserScan.h" 
+double distance = 0;
+
+void Callback(const sensor_msgs::LaserScan::ConstPtr& msg){
+ 
+     distance = msg->ranges[540];
+     std::cout << "I heard:" << distance << std::endl;
+   }
+
+int main(int argc,char **argv){
+  geometry_msgs::Twist msg; 
+  ros::init(argc,argv,"sc1_listener");
+  ros::NodeHandle n;
+  ros::Subscriber sensor_sub =n.subscribe("scan", 1000, Callback);
+  ros::Publisher sensor_pub = n.advertise<geometry_msgs::Twist>("mobile_base/commands/velocity",1000);
+
+  while(ros::ok()){
+      if(distance<2){
+       msg.linear.x = 0.0;
+       msg.angular.x = 0.8;
+       sensor_pub.publish(msg);
+       sleep(1);
+      }
+    else{
+      msg.linear.x = 0.5;
+      msg.angular.x = 0.0;
+      sensor_pub.publish(msg);
+      sleep(1);
+    } 
+   }
+  ros::spin();
+  return 0;
+}

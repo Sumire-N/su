@@ -1,0 +1,2 @@
+beginner_tutorials:first:my_service:my_teleop:sc1:simple_goal
+-DCATKIN_DEVEL_PREFIX=/home/demulab/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/demulab/catkin_ws/install -G Unix Makefiles

@@ -1,0 +1,8 @@
+prefix=/home/demulab/catkin_ws/devel
+
+Name: my_teleop
+Description: Description of my_teleop
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/demulab/catkin_ws/devel/lib 
+Requires: 

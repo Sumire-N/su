@@ -1,0 +1,346 @@
+テトリスゲーム作成
+「壁に面しているときは回転しない」
+壁にそってブロックが３つあったら回転しないようにする
+「rotate関数を右回り用と左回り用に分ける]
+今の状況
+　j→右回転（CW）
+ k→左回転（CCW）
+変更予定
+ j→左回転（CCW）
+ k→右回転（CW）
+
+k版
+void Rotate_CW(void)
+{
+	NoRotate_flg=0;
+	NoRotate_LeftWall();
+	NoRotate_RightWall();
+	if(NoRotate_flg==0)
+	{
+		if(new_block==T_BLOCK)
+		{
+			switch(BlockStyle){
+				case 1:
+					if(stage[element1_h-1][element1_w+1]==0)
+					{
+						BlockStyle=4;
+						stage[element1_h][element1_w]=0;
+						stage[element1_h-1][element1_w+1]=2;
+					}
+					break;
+					
+				case 2:	
+					if(stage[element1_h+1][element1_w+1]==0)
+					{
+						BlockStyle=1;
+						//Serch_first2Block();
+						stage[element1_h][element1_w]=0;
+						stage[element1_h+1][element1_w+1]=2;
+					}
+					break;
+					
+				case 3:
+					if(stage[element1_h][element1_w-1]==0 &&
+					stage[element1_h-1][element1_w]==0)
+					{
+						BlockStyle=2;			
+					
+						stage[element1_h+1][element1_w-1]=0;
+						stage[element1_h+1][element1_w+1]=0;
+						stage[element1_h][element1_w-1]=2;
+						stage[element1_h-1][element1_w]=2;
+					}
+					break;
+			
+				case 4:
+					if(stage[element1_h+2][element1_w-1]==0 &&
+					stage[element1_h+2][element1_w+1]==0)
+					{
+						BlockStyle=3;
+						//Serch_first2Block();
+						stage[element1_h][element1_w]=0;
+						stage[element1_h+1][element1_w+1]=0;
+						stage[element1_h+2][element1_w-1]=2;
+						stage[element1_h+2][element1_w+1]=2;
+					}
+					break;
+	
+				}
+		}
+	
+	
+		else if(new_block==I_BLOCK)
+		{
+			switch(BlockStyle){
+				DefineElement();
+				case 1:
+					if(	stage[element1_h-1][element1_w+2]==0 &&
+						stage[element1_h+1][element1_w+2]==0 &&
+						stage[element1_h+2][element1_w+2]==0 &&
+						element1_h<17)//Iブロックが回転することで床にめり込まないようにするため
+					{	
+						BlockStyle=2;
+
+						stage[element1_h][element1_w]=0;
+						stage[element1_h][element1_w+1]=0;
+						stage[element1_h][element1_w+3]=0;
+
+						stage[element1_h-1][element1_w+2]=2;
+						stage[element1_h+1][element1_w+2]=2;
+						stage[element1_h+2][element1_w+2]=2;			
+					}
+				
+					break;
+				case 2:
+				if(	stage[element1_h+1][element1_w-2]==0 &&
+					stage[element1_h+1][element1_w-1]==0 &&
+					stage[element1_h+1][element1_w+1]==0)
+				{
+					BlockStyle=1;
+					stage[element1_h][element1_w]=0;
+					stage[element1_h+2][element1_w]=0;
+					stage[element1_h+3][element1_w]=0;
+					stage[element1_h+1][element1_w-2]=2;
+					stage[element1_h+1][element1_w-1]=2;
+					stage[element1_h+1][element1_w+1]=2;
+				}
+				break;
+			}
+		}
+		
+		
+		else if(new_block==L_BLOCK)
+		{
+			switch(BlockStyle){
+				case 1:
+					
+					if(stage[element1_h+1][element1_w+1]==0 &&
+					stage[element1_h+2][element1_w-1]==0)
+					{
+						BlockStyle=4;
+						stage[element1_h][element1_w]=0;
+						stage[element1_h+1][element1_w]=0;
+						stage[element1_h+1][element1_w+1]=2;
+						stage[element1_h+2][element1_w-1]=2;
+					}
+					break;
+						
+					
+				case 2:
+					if(	stage[element1_h-1][element1_w+1]==0 &&
+						stage[element1_h+1][element1_w+1]==0 &&
+						stage[element1_h+1][element1_w+2]==0)
+					{
+						BlockStyle=1;
+					
+						//Serch_first2Block();
+						stage[element1_h][element1_w]=0;
+						stage[element1_h][element1_w+2]=0;
+						stage[element1_h+1][element1_w]=0;
+						stage[element1_h-1][element1_w+1]=2;
+						stage[element1_h+1][element1_w+1]=2;
+						stage[element1_h+1][element1_w+2]=2;
+					}
+					break;
+
+				case 3:
+					if(stage[element1_h+1][element1_w]==0 &&
+						stage[element1_h+1][element1_w+2]==0 &&
+						stage[element1_h+2][element1_w]==0)
+						{
+							BlockStyle=2;
+							
+							//Serch_first2Block();
+							stage[element1_h][element1_w]=0;
+							stage[element1_h][element1_w+1]=0;
+							stage[element1_h+2][element1_w+1]=0;
+							stage[element1_h+1][element1_w]=2;
+							stage[element1_h+1][element1_w+2]=2;
+							stage[element1_h+2][element1_w]=2;
+						}
+					break;
+					
+			case 4:
+			
+					if(stage[element1_h-1][element1_w-2]==0 &&
+						stage[element1_h-1][element1_w-1]==0 &&
+						stage[element1_h][element1_w-1]==0)
+						{
+							BlockStyle=3;
+							//Serch_first2Block();
+							stage[element1_h][element1_w]=0;
+							stage[element1_h+1][element1_w-2]=0;
+							stage[element1_h+1][element1_w+2]=0;
+							stage[element1_h+1][element1_w]=0;
+							stage[element1_h-1][element1_w-2]=2;
+							stage[element1_h-1][element1_w-1]=2;
+							stage[element1_h][element1_w-1]=2;
+						}
+					break;
+			}
+		}
+	
+	
+	
+		else if(new_block==J_BLOCK)
+		{
+			switch(BlockStyle){
+				case 1:
+					if(	stage[element1_h+1][element1_w-1]==0 &&
+						stage[element1_h+1][element1_w+1]==0 &&
+						stage[element1_h+2][element1_w+1]==0)
+						{
+							BlockStyle=4;
+							//Serch_first2Block();
+							stage[element1_h][element1_w]=0;
+							stage[element1_h+2][element1_w-1]=0;
+							stage[element1_h+2][element1_w]=0;
+							stage[element1_h+1][element1_w-1]=2;
+							stage[element1_h+1][element1_w+1]=2;
+							stage[element1_h+2][element1_w+1]=2;
+						}
+					break;
+					
+				case 2:
+					if(	stage[element1_h-1][element1_w+1]==0 &&
+						stage[element1_h][element1_w+1]==0)
+					{
+						BlockStyle=1;
+						//Serch_first2Block();
+						stage[element1_h][element1_w]=0;
+						stage[element1_h+1][element1_w+2]=0;
+						stage[element1_h-1][element1_w+1]=2;
+						stage[element1_h][element1_w+1]=2;
+					}
+					break;
+					
+				case 3:
+					if(	stage[element1_h+1][element1_w-1]==0 &&
+						stage[element1_h+2][element1_w-1]==0 &&
+						stage[element1_h+2][element1_w+1]==0)
+						{
+							BlockStyle=2;
+							//Serch_first2Block();
+							stage[element1_h][element1_w]=0;
+							stage[element1_h+1][element1_w]=0;
+							stage[element1_h][element1_w+1]=0;
+							stage[element1_h+1][element1_w-1]=2;
+							stage[element1_h+2][element1_w-1]=2;
+							stage[element1_h+2][element1_w+1]=2;
+						}
+					break;
+			
+				case 4:
+					if(	stage[element1_h+1][element1_w+1]==0 &&
+						stage[element1_h-1][element1_w+2]==0 &&
+						stage[element1_h-1][element1_w+1]==0)
+						{
+							BlockStyle=3;
+							//Serch_first2Block();
+							stage[element1_h][element1_w]=0;
+							stage[element1_h][element1_w+2]=0;
+							stage[element1_h+1][element1_w+2]=0;
+							stage[element1_h+1][element1_w+1]=2;
+							stage[element1_h-1][element1_w+2]=2;
+							stage[element1_h-1][element1_w+1]=2;
+						}
+				break;
+			}
+		}
+	
+	
+		else if(new_block==S_BLOCK)
+		{
+			switch(BlockStyle){
+				case 1:
+					if(	stage[element1_h][element1_w-1]==0 &&
+						stage[element1_h-1][element1_w-1]==0)
+					{
+						//printf("case１");
+						//sleep(300);
+						BlockStyle=2;
+						stage[element1_h][element1_w+1]=0;
+						stage[element1_h+1][element1_w-1]=0;
+						stage[element1_h][element1_w-1]=2;
+						stage[element1_h-1][element1_w-1]=2;
+					}
+					break;
+				case 2:
+					if(	stage[element1_h+1][element1_w+2]==0 &&
+						stage[element1_h+2][element1_w]==0)
+					{
+						BlockStyle=1;
+						stage[element1_h][element1_w]=0;
+						stage[element1_h+1][element1_w]=0;
+						stage[element1_h+1][element1_w+2]=2;
+						stage[element1_h+2][element1_w]=2;
+					}
+					break;
+			}
+		}
+
+		else if(new_block==Z_BLOCK)
+		{
+			//WallKick();
+			switch(BlockStyle){
+				case 1:
+					if(	stage[element1_h][element1_w+2]==0 &&
+						stage[element1_h-1][element1_w+2]==0)
+					{
+						BlockStyle=2;
+						stage[element1_h][element1_w]=0;
+						stage[element1_h+1][element1_w+2]=0;
+						stage[element1_h][element1_w+2]=2;
+						stage[element1_h-1][element1_w+2]=2;
+					}
+					break;
+
+				case 2:
+					if(	stage[element1_h+2][element1_w]==0 &&
+						stage[element1_h+1][element1_w-2]==0)
+					{
+						BlockStyle=1;
+						stage[element1_h][element1_w]=0;
+						stage[element1_h+1][element1_w]=0;
+						stage[element1_h+2][element1_w]=2;
+						stage[element1_h+1][element1_w-2]=2;
+					}
+					break;
+			}
+		}
+	}
+}
+
+
+
+修正が要りそうなところ
+・名前をわかりやすくする　dinamic ｂｒｏｃｋ
+・バニッシュ関数
+・ゲームオーバー関数
+・define element関数
+
+
+「define element関数」
+
+ブロックを消さない関数にする
+
+void DefineDynamicElement(void){//ブロックひとつひとつの■の座標を定義する、そしてブロックを消す
+	int element_count=0;
+	int height_g=0,width_g=0;
+	
+	for(height_g=0;height_g<20;height_g++)
+	{
+		for(width_g=0;width_g<10;width_g++)
+		{
+			if(stage[height_g][width_g]==2)
+			{
+							
+						
+			}
+		}
+	}
+
+順番に
+count up　
+
+

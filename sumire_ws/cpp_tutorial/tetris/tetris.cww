@@ -1,0 +1,305 @@
+Ｉブロックの途中
+void Rotate_CCW(void)
+{
+	NoRotate_flg=0;
+	NoRotate_LeftWall();
+	NoRotate_RightWall();
+	if(NoRotate_flg==0)
+	{
+		if(new_block==T_BLOCK)
+		{
+			switch(BlockStyle){
+				case 1:
+					if(stage[element1_h-1][element1_w+1]==0)
+					{
+						BlockStyle=2;
+						stage[element1_h][element1_w+2]=0;
+						stage[element1_h-1][element1_w+1]=2;
+					}
+					break;
+					
+				case 2:
+					if(stage[element1_h+2][element1_w-1]==0 &&
+						stage[element1_h+2][element1_w+1]==0)
+					{
+						BlockStyle=3;
+						
+						stage[element1_h][element1_w]=0;
+						stage[element1_h+1][element1_w-1]=0;
+						stage[element1_h+2][element1_w-1]=2;
+						stage[element1_h+2][element1_w+1]=2;
+					}
+					break;
+			
+				case 3:
+					if(stage[element1_h-1][element1_w]==0 &&
+						stage[element1_h][element1_w+1]==0)
+					{
+						BlockStyle=4;
+					
+						//Serch_first2Block();
+						stage[element1_h+1][element1_w-1]=0;
+						stage[element1_h+1][element1_w+1]=0;
+						stage[element1_h-1][element1_w]=2;
+						stage[element1_h][element1_w+1]=2;
+					}
+					break;	
+							
+						
+				case 4:
+			
+					if(stage[element1_h+1][element1_w-1]==0)
+					{
+						BlockStyle=1;
+						//Serch_first2Block();
+						stage[element1_h][element1_w]=0;
+						stage[element1_h+1][element1_w-1]=2;
+					}
+					break;
+							
+				}
+		}
+	
+	
+		else if(new_block==I_BLOCK)
+		{
+			switch(BlockStyle){
+				DefineElement();
+				case 1:
+				
+				if(	stage[element1_h-1][element1_w+2]==0 &&
+					stage[element1_h+1][element1_w+2]==0 &&
+					stage[element1_h+2][element1_w+2]==0 &&
+					element1_h<17)//Iブロックが回転することで床にめり込まないようにするため
+				{	
+					BlockStyle=2;
+					stage[element1_h][element1_w]=0;
+					stage[element1_h][element1_w+1]=0;
+					stage[element1_h][element1_w+3]=0;
+					stage[element1_h-1][element1_w+2]=2;
+					stage[element1_h+1][element1_w+2]=2;
+					stage[element1_h+2][element1_w+2]=2;
+				}
+				break;
+			case 2:
+				if(	stage[element1_h+1][element1_w-2]==0 &&
+					stage[element1_h+1][element1_w-1]==0 &&
+					stage[element1_h+1][element1_w+1]==0)
+				{
+					//DefineElement();
+					BlockStyle=1;
+
+					stage[element1_h][element1_w]=0;
+					stage[element1_h+2][element1_w]=0;
+					stage[element1_h+3][element1_w]=0;
+
+					stage[element1_h+1][element1_w-2]=2;
+					stage[element1_h+1][element1_w-1]=2;
+					stage[element1_h+1][element1_w+1]=2;
+				}
+				break;
+			}
+		}
+		
+		
+		else if(new_block==L_BLOCK)
+		{
+			switch(BlockStyle){
+				case 1:
+					if(	stage[element1_h+1][element1_w-1]==0 &&
+						stage[element1_h+1][element1_w+1]==0 &&
+						stage[element1_h+2][element1_w-1]==0)
+						{
+							BlockStyle=2;
+							
+							//Serch_first2Block();
+							stage[element1_h][element1_w]=0;
+							stage[element1_h+2][element1_w]=0;
+							stage[element1_h+2][element1_w+1]=0;
+							stage[element1_h+1][element1_w-1]=2;
+							stage[element1_h+1][element1_w+1]=2;
+							stage[element1_h+2][element1_w-1]=2;
+						}
+						break;
+						
+					
+				case 2:
+					if(stage[element1_h-1][element1_w]==0 &&
+						stage[element1_h-1][element1_w+1]==0 &&
+						stage[element1_h+1][element1_w+1]==0)
+						{
+							BlockStyle=3;
+							
+							//Serch_first2Block();
+							stage[element1_h][element1_w]=0;
+							stage[element1_h][element1_w+2]=0;
+							stage[element1_h+1][element1_w]=0;
+							stage[element1_h-1][element1_w]=2;
+							stage[element1_h-1][element1_w+1]=2;
+							stage[element1_h+1][element1_w+1]=2;
+						}
+						break;
+						
+					
+				case 3:
+					
+					if(stage[element1_h+1][element1_w+2]==0 &&
+						stage[element1_h+2][element1_w]==0 &&
+						stage[element1_h+2][element1_w+2]==0)
+						{
+							BlockStyle=4;
+						
+							//Serch_first2Block();
+							stage[element1_h][element1_w]=0;
+							stage[element1_h][element1_w+1]=0;
+							stage[element1_h+1][element1_w+1]=0;
+							stage[element1_h+1][element1_w+2]=2;
+							stage[element1_h+2][element1_w]=2;
+							stage[element1_h+2][element1_w+2]=2;
+						}
+						break;
+			
+			case 4:
+				if(stage[element1_h-1][element1_w-1]==0 &&
+					stage[element1_h][element1_w-1]==0)
+				{
+					BlockStyle=1;
+					//Serch_first2Block();
+					stage[element1_h][element1_w]=0;
+					stage[element1_h+1][element1_w-2]=0;
+					stage[element1_h+1][element1_w+2]=0;
+					stage[element1_h-1][element1_w-1]=2;
+					stage[element1_h][element1_w-1]=2;
+				}
+					break;
+						
+			}
+		}
+	
+	
+	
+		else if(new_block==J_BLOCK)
+		{
+			switch(BlockStyle){
+				case 1:
+					if(stage[element1_h+1][element1_w-1]==0 &&
+					stage[element1_h+2][element1_w+1]==0)
+					{
+						BlockStyle=2;
+						//Serch_first2Block();
+						stage[element1_h][element1_w]=0;
+						stage[element1_h+1][element1_w]=0;
+						stage[element1_h+1][element1_w-1]=2;
+						stage[element1_h+2][element1_w+1]=2;
+					}
+					break;
+					
+				case 2:
+					if(	stage[element1_h-1][element1_w+1]==0 &&
+						stage[element1_h-1][element1_w+2]==0 &&
+						stage[element1_h][element1_w+1]==0)
+						{
+							BlockStyle=3;
+							//Serch_first2Block();
+							stage[element1_h][element1_w]=0;
+							stage[element1_h+1][element1_w]=0;
+							stage[element1_h+1][element1_w+2]=0;
+							stage[element1_h-1][element1_w+1]=2;
+							stage[element1_h-1][element1_w+2]=2;
+							stage[element1_h][element1_w+1]=2;
+						}
+						break;
+
+				case 3:
+					if(stage[element1_h+1][element1_w-1]==0 &&
+						stage[element1_h+1][element1_w+1]==0 &&
+						stage[element1_h+2][element1_w+1]==0)
+						{
+							BlockStyle=4;
+							//Serch_first2Block();
+							stage[element1_h][element1_w]=0;
+							stage[element1_h][element1_w+1]=0;
+							stage[element1_h+2][element1_w]=0;
+							stage[element1_h+1][element1_w-1]=2;
+							stage[element1_h+1][element1_w+1]=2;
+							stage[element1_h+2][element1_w+1]=2;
+						}
+						break;
+
+				case 4:
+					if(	stage[element1_h+1][element1_w]==0 &&
+						stage[element1_h+1][element1_w+1]==0 &&
+						stage[element1_h-1][element1_w+1]==0)
+						{
+							BlockStyle=1;
+							//Serch_first2Block();
+							stage[element1_h][element1_w]=0;
+							stage[element1_h][element1_w+2]=0;
+							stage[element1_h+1][element1_w+2]=0;
+							stage[element1_h+1][element1_w]=2;
+							stage[element1_h+1][element1_w+1]=2;
+							stage[element1_h-1][element1_w+1]=2;
+						}
+						break;
+			}
+		}
+	
+	
+		else if(new_block==S_BLOCK)
+		{
+				
+			switch(BlockStyle){
+				case 1:
+					if(	stage[element1_h][element1_w-1]==0 &&
+						stage[element1_h-1][element1_w-1]==0)
+					{
+						BlockStyle=2;
+						stage[element1_h][element1_w+1]=0;
+						stage[element1_h+1][element1_w-1]=0;
+						stage[element1_h][element1_w-1]=2;
+						stage[element1_h-1][element1_w-1]=2;
+					}
+					break;
+				case 2:
+					if(	stage[element1_h+1][element1_w+2]==0 &&
+						stage[element1_h+2][element1_w]==0)
+					{
+						BlockStyle=1;
+						stage[element1_h][element1_w]=0;
+						stage[element1_h+1][element1_w]=0;
+						stage[element1_h+1][element1_w+2]=2;
+						stage[element1_h+2][element1_w]=2;
+					}
+					break;
+			}
+		}
+		else if(new_block==Z_BLOCK)
+		{
+			switch(BlockStyle){
+				case 1:
+					if(	stage[element1_h][element1_w+2]==0 &&
+						stage[element1_h-1][element1_w+2]==0)
+					{
+						BlockStyle=2;
+						stage[element1_h][element1_w]=0;
+						stage[element1_h+1][element1_w+2]=0;
+						stage[element1_h][element1_w+2]=2;
+						stage[element1_h-1][element1_w+2]=2;
+					}
+				break;
+			case 2:
+					if(	stage[element1_h+2][element1_w]==0 &&
+						stage[element1_h+1][element1_w-2]==0)
+					{
+						BlockStyle=1;
+						stage[element1_h][element1_w]=0;
+						stage[element1_h+1][element1_w]=0;
+						stage[element1_h+2][element1_w]=2;
+						stage[element1_h+1][element1_w-2]=2;
+					}
+					break;
+			}
+		}
+	}
+}
+

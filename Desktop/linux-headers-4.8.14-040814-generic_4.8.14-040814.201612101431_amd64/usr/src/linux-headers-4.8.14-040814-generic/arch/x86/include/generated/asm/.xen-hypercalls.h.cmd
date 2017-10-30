@@ -1,0 +1,1 @@
+cmd_arch/x86/entry/syscalls/../../include/generated/asm/xen-hypercalls.h := /bin/bash '/home/kernel/COD/linux/scripts/xen-hypercalls.sh' arch/x86/entry/syscalls/../../include/generated/asm/xen-hypercalls.h /home/kernel/COD/linux/include/xen/interface/xenpmu.h /home/kernel/COD/linux/include/xen/interface/xen.h /home/kernel/COD/linux/include/xen/interface/xen-mca.h

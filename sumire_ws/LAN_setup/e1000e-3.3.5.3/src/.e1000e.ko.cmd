@@ -1,0 +1,1 @@
+cmd_/home/demulab/sumire_ws/LAN_setup/e1000e-3.3.5.3/src/e1000e.ko := ld -r -m elf_x86_64 -T /usr/src/linux-headers-3.13.0-24-generic/scripts/module-common.lds --build-id  -o /home/demulab/sumire_ws/LAN_setup/e1000e-3.3.5.3/src/e1000e.ko /home/demulab/sumire_ws/LAN_setup/e1000e-3.3.5.3/src/e1000e.o /home/demulab/sumire_ws/LAN_setup/e1000e-3.3.5.3/src/e1000e.mod.o
